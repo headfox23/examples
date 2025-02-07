@@ -18,6 +18,8 @@ public class ExtraEventController {
             ExtraEvent start = eventMap.get(extraEvent.getEventId());
             if (start != null) {
                 metricsService.incrementCounter(this.getClass(), "eventsFinished");
+            } else {
+                metricsService.incrementCounter(this.getClass(), "eventsFinishedError");
             }
         }
     }
