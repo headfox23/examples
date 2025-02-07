@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.io.IOException;
-import java.time.Duration;
 import java.time.Instant;
 
 

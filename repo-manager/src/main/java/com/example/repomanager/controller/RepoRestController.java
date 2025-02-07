@@ -6,15 +6,13 @@ import com.example.repomanager.repositories.RepoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
-import static com.example.repomanager.config.SecurityRoles.SCOPE_ROLE_REPO_READ;
-import static com.example.repomanager.config.SecurityRoles.SCOPE_ROLE_REPO_STORE;
+import static com.example.repomanager.config.SecurityConfig.SCOPE_REPO_READ;
+import static com.example.repomanager.config.SecurityConfig.SCOPE_REPO_STORE;
 
 @Slf4j
 @RequestMapping(RootRestController.ROOT_URL + "/repos")
@@ -25,7 +23,7 @@ public class RepoRestController extends RootRestController {
     private final RepoRepository repoRepository;
 
     @PostMapping(value = "", consumes = "application/json")
-    @PreAuthorize("hasAnyAuthority('" + SCOPE_ROLE_REPO_STORE + "')")
+    @PreAuthorize("hasAnyAuthority('ROLE_" + SCOPE_REPO_STORE + "')")
     public RepoDto addRepo(@RequestBody RepoDto dto) {
         Repo repo = new Repo();
         repo.setName(dto.getName());
@@ -36,7 +34,7 @@ public class RepoRestController extends RootRestController {
     }
 
     @GetMapping(value = "", produces = "application/json")
-    @PreAuthorize("hasAnyAuthority('" + SCOPE_ROLE_REPO_READ + "')")
+    @PreAuthorize("hasAnyAuthority('ROLE_" + SCOPE_REPO_READ + "')")
     public List<RepoDto> getRepos() {
         return repoRepository.findAll().stream().map(Repo::toDto).toList();
     }
