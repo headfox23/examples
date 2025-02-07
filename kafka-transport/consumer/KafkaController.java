@@ -7,7 +7,7 @@ import many.nice.imports.*;
 @Slf4j
 public class ExtraEventController {
     private final MetricsService metricsService;
-    private static Map<String, ExtraEvent> eventMap = new ConcurrentHashMap<String, ExtraEvent>();
+    private static Map<String, ExtraEvent> eventMap = new HashMap<String, ExtraEvent>();
 
     @KafkaListener(topics = "#{applicationProperties.extraEventTopicName}")
     public void receive(ExtraEvent extraEvent) {
